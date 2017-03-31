@@ -17,9 +17,7 @@ default-exchange-name "")
 (defn main
   [& args]
   (println rmq/*default-config*)
-  (let [_ (println "BP0")
-        conn (rmq/connect)
-        _ (println "BP1")
+  (let [conn (rmq/connect)
         ch (lch/open conn)
         qname "langohr.examples.hello-world"]
 
