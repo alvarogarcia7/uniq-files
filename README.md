@@ -1,5 +1,7 @@
 ##
 
+Sandbox for practicing AMQP, component/mount
+
 ### How to run it
 
 ```bash
