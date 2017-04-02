@@ -52,14 +52,18 @@ default-exchange-name "")
     (rmq/close ch)
     (rmq/close conn)))
 
+(defn configure-handler
+  [ch qname message-handler]
+  (lq/declare ch qname {:exclusive false :auto-delete true})
+  (lc/subscribe ch qname message-handler {:auto-ack true}))
+
 (defn test-send-messages
   []
   (let [mq (connect-to-mq)
         {ch :channel} mq
         qname "langohr.examples.hello-world"]
     (println (format "[main] Connected. Channel id: %d" (.getChannelNumber ch)))
-    (lq/declare ch qname {:exclusive false :auto-delete true})
-    (lc/subscribe ch qname message-handler {:auto-ack true})
+    (configure-handler ch qname message-handler)
     (doall
       (for [i (range 10)]
              (lb/publish ch default-exchange-name qname (str "Hello! " i) {:content-type "text/plain" :type
