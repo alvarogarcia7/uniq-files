@@ -33,8 +33,10 @@ default-exchange-name "")
       )))
 
 
-(def lines
-  (with-open [rdr (reader "/tmp/md5sc_sorted.txt")]
+(defn
+  lines
+  [path]
+  (with-open [rdr (reader path)]
     (doall (line-seq rdr))))
 
 (defn
