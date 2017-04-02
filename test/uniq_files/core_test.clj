@@ -30,7 +30,13 @@ default-exchange-name "")
                 (let [{hash :hash filename :filename} ele
                       current (get acc hash [])]
                   (assoc acc hash (conj current filename)))) {})
-      )))
+      (map (fn [x] (print "# ") (println  x) x))
+      (map (fn
+             [[hash filenames]]
+             (let [filenames (sort filenames)]
+               (println (str "#HASH = " hash))
+               (println (str "# keep " (last filenames)))
+               (doall (map #(println "rm " %) (butlast filenames)))))))))
 
 
 (defn
