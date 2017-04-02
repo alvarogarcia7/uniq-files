@@ -25,7 +25,8 @@ default-exchange-name "")
     (lc/subscribe ch qname message-handler {:auto-ack true})
     (doall
       (for [i (range 10)]
-             (lb/publish ch default-exchange-name qname (str "Hello!" i) {:content-type "text/plain" :type "greetings.hi"})))
+             (lb/publish ch default-exchange-name qname (str "Hello! " i) {:content-type "text/plain" :type
+                                                                                         "greetings.hi"})))
     (Thread/sleep 2000)
     (println "[main] Disconnecting...")
     (rmq/close ch)
