@@ -45,12 +45,17 @@ default-exchange-name "")
     {:connection conn
      :channel    ch}))
 
-(close
-  [])
+(defn
+  disconnect-from-mq
+  [mq]
+  (let [{conn :connection ch :channel} mq]
+    (rmq/close ch)
+    (rmq/close conn)))
 
 (defn test-send-messages
   []
-  (let [{conn :connection ch :channel} (connect-to-mq)
+  (let [mq (connect-to-mq)
+        {conn :connection ch :channel} mq
         qname "langohr.examples.hello-world"]
     (println (format "[main] Connected. Channel id: %d" (.getChannelNumber ch)))
     (lq/declare ch qname {:exclusive false :auto-delete true})
@@ -61,5 +66,4 @@ default-exchange-name "")
                                                                                          "greetings.hi"})))
     (Thread/sleep 2000)
     (println "[main] Disconnecting...")
-    (rmq/close ch)
-    (rmq/close conn)))
+    (disconnect-from-mq mq)))
