@@ -16,7 +16,7 @@ default-exchange-name "")
                    (String. payload "UTF-8") delivery-tag content-type type)))
 
 (defn
-  split-by-hash
+  group-by-hash
   [lines]
   (letfn [(tokenize
             [line]
