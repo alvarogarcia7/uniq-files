@@ -18,12 +18,19 @@ default-exchange-name "")
 (defn
   split-by-hash
   [lines]
-  (let [x {:hash [:filename]}]
-    (letfn [(tokenize
-              [line]
-              (let [[filename hash] (split line #" ")]
-                {hash filename}))]
-      (map tokenize lines))))
+  (letfn [(tokenize
+            [line]
+            (let [[filename hash] (split line #" ")]
+              {:hash hash :filename filename}))]
+    (->>
+      lines
+      (map tokenize)
+      (reduce (fn
+                [acc ele]
+                (let [{hash :hash filename :filename} ele
+                      current (get acc hash [])]
+                  (assoc acc hash (conj current filename)))) {})
+      )))
 
 
 (def lines
