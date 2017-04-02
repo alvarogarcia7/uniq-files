@@ -1,6 +1,6 @@
-##
+## Uniq-Files OR Langohr Test
 
-Sandbox for practicing AMQP, component/mount
+Sandbox for practicing AMQP, component/mount.
 
 ### How to run it
 
