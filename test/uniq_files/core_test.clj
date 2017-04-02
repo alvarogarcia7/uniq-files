@@ -15,7 +15,7 @@ default-exchange-name "")
                    (String. payload "UTF-8") delivery-tag content-type type)))
 
 (defn main
-  [& args]
+  []
   (let [conn (rmq/connect)
         ch (lch/open conn)
         qname "langohr.examples.hello-world"]
