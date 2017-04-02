@@ -14,7 +14,7 @@ default-exchange-name "")
   (println (format "[consumer] Received a message: %s, delivery tag: %d, content type: %s, type: %s"
                    (String. payload "UTF-8") delivery-tag content-type type)))
 
-(defn main
+(defn test-send-messages
   []
   (let [conn (rmq/connect)
         ch (lch/open conn)
