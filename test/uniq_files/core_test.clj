@@ -65,6 +65,22 @@ default-exchange-name "")
   (lq/declare ch qname {:exclusive false :auto-delete true})
   (lc/subscribe ch qname message-handler {:auto-ack true}))
 
+(defn
+  get-last
+  [_ ^bytes payload]
+  (println (format "[get-last] Received a message: %s" (String. payload "UTF-8"))))
+
+
+(defn
+  publish-message
+  [ch qname message-type payload]
+  (lb/publish
+    ch
+    default-exchange-name
+    qname
+    payload
+    {:content-type "text/plain" :type "greetings.hi"}))
+
 (defn test-send-messages
   []
   (let [mq (connect-to-mq)
