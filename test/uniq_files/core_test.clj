@@ -55,7 +55,7 @@ default-exchange-name "")
 (defn test-send-messages
   []
   (let [mq (connect-to-mq)
-        {conn :connection ch :channel} mq
+        {ch :channel} mq
         qname "langohr.examples.hello-world"]
     (println (format "[main] Connected. Channel id: %d" (.getChannelNumber ch)))
     (lq/declare ch qname {:exclusive false :auto-delete true})
