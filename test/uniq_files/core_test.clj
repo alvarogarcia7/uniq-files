@@ -37,12 +37,21 @@ default-exchange-name "")
   (with-open [rdr (reader "/tmp/md5sc_sorted.txt")]
     (doall (line-seq rdr))))
 
-(defn test-send-messages
+(defn
+  connect-to-mq
   []
   (let [conn (rmq/connect)
-        ch (lch/open conn)
-        qname "langohr.examples.hello-world"]
+        ch (lch/open conn)]
+    {:connection conn
+     :channel    ch}))
 
+(close
+  [])
+
+(defn test-send-messages
+  []
+  (let [{conn :connection ch :channel} (connect-to-mq)
+        qname "langohr.examples.hello-world"]
     (println (format "[main] Connected. Channel id: %d" (.getChannelNumber ch)))
     (lq/declare ch qname {:exclusive false :auto-delete true})
     (lc/subscribe ch qname message-handler {:auto-ack true})
