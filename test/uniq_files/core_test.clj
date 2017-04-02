@@ -4,7 +4,8 @@
             [langohr.queue :as lq]
             [langohr.consumers :as lc]
             [langohr.basic :as lb]
-            [uniq-files.core :refer :all]))
+            [uniq-files.core :refer :all]
+            [clojure.string :require :split]))
 
 (def ^{:const true}
 default-exchange-name "")
@@ -13,6 +14,21 @@ default-exchange-name "")
   [ch {:keys [content-type delivery-tag type] :as meta} ^bytes payload]
   (println (format "[consumer] Received a message: %s, delivery tag: %d, content type: %s, type: %s"
                    (String. payload "UTF-8") delivery-tag content-type type)))
+
+(defn
+  split-by-hash
+  [lines]
+  (let [x {:hash [:filename]}]
+    (letfn [(tokenize
+              [line]
+              (let [[filename hash] (split line #" ")]
+                {hash filename}))]
+      (map tokenize lines))))
+
+
+(def lines
+  (with-open [rdr (reader "/tmp/md5sc_sorted.txt")]
+    (doall (line-seq rdr))))
 
 (defn test-send-messages
   []
