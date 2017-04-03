@@ -29,30 +29,3 @@
   [path]
   (with-open [rdr (reader path)]
     (doall (line-seq rdr))))
-
-
-
-(defn
-  publish-message
-  [ch qname message-type payload]
-  (lb/publish
-    ch
-    default-exchange-name
-    qname
-    payload
-    {:content-type "text/plain" :type "greetings.hi"}))
-
-(defn test-send-messages
-  []
-  (let [mq (connect-to-mq)
-        {ch :channel} mq
-        qname "langohr.examples.hello-world"]
-    (println (format "[main] Connected. Channel id: %d" (.getChannelNumber ch)))
-    (configure-handler ch qname message-handler)
-    (doall
-      (for [i (range 10)]
-             (lb/publish ch default-exchange-name qname (str "Hello! " i) {:content-type "text/plain" :type
-                                                                                         "greetings.hi"})))
-    (Thread/sleep 2000)
-    (println "[main] Disconnecting...")
-    (disconnect-from-mq mq)))
