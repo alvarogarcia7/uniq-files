@@ -33,8 +33,8 @@
             (to-keep [filenames] (list (decorate (last filenames)
                                                  (fn [record] (str "# keep " (:filename record))))))
             (to-remove [filenames] (map #(decorate %
-                                                           (fn [record] (str "rm " (:filename record))))
-                                                (butlast filenames)))]
+                                                   (fn [record] (str "rm " (:filename record))))
+                                        (butlast filenames)))]
       ;(println (str "#HASH = " hash))
       (->>
         (concat
