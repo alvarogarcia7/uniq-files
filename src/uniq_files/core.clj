@@ -28,8 +28,10 @@
 
 (def
   actions
-  (letfn [(object [filename command action-name hash] {:filename filename :command command :action-name action-name
-                                                       :hash     hash})
+  (letfn [(object [filename command action-name hash] {:filename    filename
+                                                       :command     command
+                                                       :action-name action-name
+                                                       :hash        hash})
           (to-keep [[hash filenames]] (list (object (last filenames)
                                                     (fn [record] (str "# keep " (:filename record)))
                                                     :keep
