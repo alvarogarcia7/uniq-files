@@ -1,33 +1,7 @@
 (ns uniq-files.core-test
-  (:use [clojure.string]
-        [uniq-files.core])
+  (:use [uniq-files.core])
   (:require [midje.sweet :refer :all]))
 
-(defn
-  group-by-hash
-  [lines]
-  (letfn [(tokenize
-            [line]
-            (let [[filename hash] (split line #" ")]
-              {:hash hash :filename filename}))]
-    (->>
-      lines
-      (map tokenize)
-      (reduce (fn
-                [acc ele]
-                (let [{hash :hash filename :filename} ele
-                      current (get acc hash [])]
-                  (assoc acc hash (conj current filename)))) {})
-      (map (fn [x] (print "# ") (println  x) x))
-      (map (fn
-             [[hash filenames]]
-             (let [filenames (sort filenames)]
-               ;(println (str "#HASH = " hash))
-               (concat
-                 (list (str "# keep " (last filenames)))
-                 (doall (map #(str "rm " %) (butlast filenames)))))))
-      flatten
-      (map println))))
 
 
 (facts
