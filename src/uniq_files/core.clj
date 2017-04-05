@@ -14,19 +14,22 @@
   (let [[filename hash] (split line #" ")]
     {:hash hash :filename filename}))
 
+(defn group-by-hash
+  [xs]
+  (reduce (fn
+            [acc ele]
+            (let [{hash :hash filename :filename} ele
+                  current (get acc hash [])]
+              (assoc acc hash (conj current filename)))) {} xs))
 
 (defn
-  group-by-hash
+  create-script
   [lines]
   (letfn []
     (->>
       lines
       (map tokenize)
-      (reduce (fn
-                [acc ele]
-                (let [{hash :hash filename :filename} ele
-                      current (get acc hash [])]
-                  (assoc acc hash (conj current filename)))) {})
+      group-by-hash
       (map (fn [x] (print "# ") (println  x) x))
       (map (fn
              [[hash filenames]]
@@ -36,4 +39,13 @@
                  (list (str "# keep " (last filenames)))
                  (doall (map #(str "rm " %) (butlast filenames)))))))
       flatten
-      (map println))))
+      )))
+
+
+(defn
+  bash-script-action
+  [lines]
+  (->> lines
+       create-script
+       (map println))
+  )
