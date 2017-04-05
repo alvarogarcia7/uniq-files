@@ -26,7 +26,8 @@
                (concat
                  (list (str "# keep " (last filenames)))
                  (doall (map #(str "rm " %) (butlast filenames)))))))
-      flatten)))
+      flatten
+      (map println))))
 
 
 (facts
