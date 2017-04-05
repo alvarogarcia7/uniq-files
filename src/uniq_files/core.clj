@@ -29,8 +29,10 @@
 (defn to-script
   [[hash filenames]]
   (let [filenames (sort filenames)]
-    (letfn [(to-keep [filenames] (list {:filename (last filenames) :command (fn [filename] (str "# keep " filename))}))
-            (to-remove [filenames] (doall (map #(-> {:filename % :command (fn [filename] (str "rm " filename))})
+    (letfn [(decorate [filename command] {:filename filename :command command})
+            (to-keep [filenames] (list (decorate (last filenames)
+                                                 (fn [filename] (str "# keep " filename)))))
+            (to-remove [filenames] (doall (map #(decorate % (fn [filename] (str "rm " filename)))
                                                (butlast filenames))))]
       ;(println (str "#HASH = " hash))
       (->>
