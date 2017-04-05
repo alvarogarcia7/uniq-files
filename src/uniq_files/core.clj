@@ -30,7 +30,6 @@
       lines
       (map tokenize)
       group-by-hash
-      (map (fn [x] (print "# ") (println  x) x))
       (map (fn
              [[hash filenames]]
              (let [filenames (sort filenames)]
