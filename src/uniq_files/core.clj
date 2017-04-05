@@ -26,7 +26,7 @@
                 (assoc acc hash))))]
     (reduce upsert-by-hash {} xs)))
 
-(defn to-script
+(defn decide-action
   [[hash filenames]]
   (let [filenames (sort filenames)]
     (letfn [(object [filename command] {:filename filename :command command})
@@ -36,12 +36,15 @@
                                                  (fn [record] (str "rm " (:filename record))))
                                         (butlast filenames)))]
       ;(println (str "#HASH = " hash))
-      (->>
-        (concat
-          (to-keep filenames)
-          (to-remove filenames))
-        (map #((:command %) %)))
+      (concat
+        (to-keep filenames)
+        (to-remove filenames))
       )))
+
+(defn apply-action
+  [actions]
+  (map #((:command %) %) actions)
+  )
 
 (defn
   create-script
@@ -50,7 +53,8 @@
     lines
     (map tokenize)
     group-by-hash
-    (map to-script)
+    (map decide-action)
+    (map apply-action)
     flatten))
 
 
