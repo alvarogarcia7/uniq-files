@@ -8,14 +8,17 @@
   (with-open [rdr (reader path)]
     (doall (line-seq rdr))))
 
+(defn
+  tokenize
+  [line]
+  (let [[filename hash] (split line #" ")]
+    {:hash hash :filename filename}))
+
 
 (defn
   group-by-hash
   [lines]
-  (letfn [(tokenize
-            [line]
-            (let [[filename hash] (split line #" ")]
-              {:hash hash :filename filename}))]
+  (letfn []
     (->>
       lines
       (map tokenize)
