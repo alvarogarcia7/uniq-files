@@ -41,12 +41,12 @@
                                              (butlast filenames)))]
     (list to-keep to-remove)))
 
-(defn decide-action
+(defn decide-command
   [hash-group]
   {:hash      hash
    :filenames (concat (map #(% hash-group) actions))})
 
-(defn apply-action
+(defn apply-command
   [action]
   ((:command action) action))
 
@@ -65,9 +65,9 @@
     lines
     (map tokenize)
     group-by-hash
-    (map decide-action)
+    (map decide-command)
     ungroup-by-hash
-    (map apply-action)
+    (map apply-command)
     ))
 
 
