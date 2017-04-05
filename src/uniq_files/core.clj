@@ -34,9 +34,12 @@
                                                (butlast
                                                                                                         filenames))))]
       ;(println (str "#HASH = " hash))
-      (concat
-        (map #((:command %) (:filename %)) (to-keep filenames))
-        (map #((:command %) (:filename %)) (to-remove filenames))))))
+      (->>
+        (concat
+          (to-keep filenames)
+          (to-remove filenames))
+        (map #((:command %) (:filename %))))
+      )))
 
 (defn
   create-script
