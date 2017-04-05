@@ -10,6 +10,14 @@
     "happy path"
     (lines "resources/files/lines.txt") => ["1" "a" "b"]))
 
+(defn
+  print-if-different
+  [actual expected]
+  (if (not= #{} (clojure.set/difference actual expected))
+    (do (println (str "expected: " expected))
+        (println (str "actual: " actual)))
+    ))
+
 (facts
   "grouping by contents"
   (fact :acceptance
@@ -23,10 +31,7 @@
              "# keep 2017-2.txt"                            ;bfcc9da4f2e1d313c63cd0a4ee7604e9
              )
           [actual expected] (map #(into #{} %) (list actual expected))]
-      (if (not= #{} (clojure.set/difference actual expected))
-        (do (println (str "expected: " expected))
-            (println (str "actual: " actual)))
-        )
+      (print-if-different actual expected)
       (clojure.set/difference actual expected) => #{}))
 
   (fact :acceptance
@@ -42,8 +47,5 @@
                      "# keep 2017-2.txt"                    ;bfcc9da4f2e1d313c63cd0a4ee7604e9
                      )
           [actual expected] (map #(into #{} %) (list actual expected))]
-      (if (not= #{} (clojure.set/difference actual expected))
-        (do (println (str "expected: " expected))
-            (println (str "actual: " actual)))
-        )
+      (print-if-different actual expected)
       (clojure.set/difference actual expected) => #{})))
