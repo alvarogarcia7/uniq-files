@@ -41,8 +41,8 @@
         (to-remove filenames)))))
 
 (defn apply-action
-  [actions]
-  (map #((:command %) %) actions))
+  [action]
+  ((:command action) action))
 
 (defn
   create-script
@@ -53,7 +53,7 @@
     group-by-hash
     (map decide-action)
     flatten
-    apply-action
+    (map apply-action)
     ))
 
 
