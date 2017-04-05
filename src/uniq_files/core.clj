@@ -29,7 +29,7 @@
 (defn decide-action
   [[hash filenames]]
   (let [filenames (sort filenames)]
-    (letfn [(object [filename command action-name] {:filename filename :command command :action-name action-name })
+    (letfn [(object [filename command action-name] {:filename filename :command command :action-name action-name})
             (to-keep [filenames] (list (object (last filenames)
                                                (fn [record] (str "# keep " (:filename record)))
                                                :keep)))
@@ -38,13 +38,22 @@
                                                  :remove)
                                         (butlast filenames)))]
       ;(println (str "#HASH = " hash))
-      (concat
-        (to-keep filenames)
-        (to-remove filenames)))))
+      {:hash hash
+       :filenames (concat
+               (to-keep filenames)
+               (to-remove filenames))})))
 
 (defn apply-action
   [action]
   ((:command action) action))
+
+(defn
+  ungroup-by-hash
+  [coll]
+  (->>
+    coll
+    (map :filenames)
+    flatten))
 
 (defn
   create-script
@@ -54,7 +63,7 @@
     (map tokenize)
     group-by-hash
     (map decide-action)
-    flatten
+    ungroup-by-hash
     (map apply-action)
     ))
 
