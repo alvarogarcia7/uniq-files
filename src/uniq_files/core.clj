@@ -42,8 +42,9 @@
     (list to-keep to-remove)))
 
 (defn decide-action
-  [[hash filenames]]
-  (let [filenames (sort filenames)]
+  [hash-group]
+  (let [[hash filenames] hash-group
+        filenames (sort filenames)]
     {:hash      hash
      :filenames (concat (map #(% [hash filenames]) actions))}))
 
