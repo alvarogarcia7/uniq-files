@@ -38,13 +38,11 @@
       ;(println (str "#HASH = " hash))
       (concat
         (to-keep filenames)
-        (to-remove filenames))
-      )))
+        (to-remove filenames)))))
 
 (defn apply-action
   [actions]
-  (map #((:command %) %) actions)
-  )
+  (map #((:command %) %) actions))
 
 (defn
   create-script
