@@ -24,7 +24,9 @@
              )
           [actual expected] (map #(into #{} %) (list actual expected))]
       (if (not= #{} (clojure.set/difference actual expected))
-        (println {:expected expected :actual actual}))
+        (do (println (str "expected: " expected))
+            (println (str "actual: " actual)))
+        )
       (clojure.set/difference actual expected) => #{}))
 
   (fact :acceptance
@@ -41,5 +43,7 @@
                      )
           [actual expected] (map #(into #{} %) (list actual expected))]
       (if (not= #{} (clojure.set/difference actual expected))
-        (println {:expected expected :actual actual}))
+        (do (println (str "expected: " expected))
+            (println (str "actual: " actual)))
+        )
       (clojure.set/difference actual expected) => #{})))
