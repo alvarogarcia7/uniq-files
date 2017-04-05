@@ -16,11 +16,12 @@
 
 (defn group-by-hash
   [xs]
-  (reduce (fn
+  (letfn [(upsert-by-hash
             [acc ele]
             (let [{hash :hash filename :filename} ele
                   current (get acc hash [])]
-              (assoc acc hash (conj current filename)))) {} xs))
+              (assoc acc hash (conj current filename))))]
+    (reduce upsert-by-hash {} xs)))
 
 (defn to-script
   [[hash filenames]]
