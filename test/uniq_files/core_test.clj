@@ -1,6 +1,6 @@
 (ns uniq-files.core-test
   (:use [clojure.string]
-        [clojure.java.io])
+        [uniq-files.core])
   (:require [midje.sweet :refer :all]))
 
 (defn
@@ -26,12 +26,6 @@
                (println (str "# keep " (last filenames)))
                (doall (map #(println "rm " %) (butlast filenames)))))))))
 
-
-(defn
-  lines
-  [path]
-  (with-open [rdr (reader path)]
-    (doall (line-seq rdr))))
 
 (facts
   "reading a file"
