@@ -43,8 +43,7 @@
 
 (defn decide-action
   [hash-group]
-  (let [[hash filenames] hash-group
-        filenames (sort filenames)]
+  (let [[hash filenames] hash-group]
     {:hash      hash
      :filenames (concat (map #(% [hash filenames]) actions))}))
 
