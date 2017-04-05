@@ -20,7 +20,10 @@
             [acc ele]
             (let [{hash :hash filename :filename} ele
                   current (get acc hash [])]
-              (assoc acc hash (conj current filename))))]
+              (->>
+                filename
+                (conj current)
+                (assoc acc hash))))]
     (reduce upsert-by-hash {} xs)))
 
 (defn to-script
