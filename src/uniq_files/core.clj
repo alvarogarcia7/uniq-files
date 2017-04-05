@@ -26,23 +26,26 @@
                 (assoc acc hash))))]
     (reduce upsert-by-hash {} xs)))
 
+(def
+  actions
+  (letfn [(object [filename command action-name hash] {:filename filename :command command :action-name action-name
+                                                       :hash     hash})
+          (to-keep [[hash filenames]] (list (object (last filenames)
+                                                    (fn [record] (str "# keep " (:filename record)))
+                                                    :keep
+                                                    hash)))
+          (to-remove [[hash filenames]] (map #(object %
+                                                      (fn [record] (str "rm " (:filename record)))
+                                                      :remove
+                                                      hash)
+                                             (butlast filenames)))]
+    (list to-keep to-remove)))
+
 (defn decide-action
   [[hash filenames]]
   (let [filenames (sort filenames)]
-    (letfn [(object [filename command action-name] {:filename filename :command command :action-name action-name
-                                                    :hash hash})
-            (to-keep [filenames] (list (object (last filenames)
-                                               (fn [record] (str "# keep " (:filename record)))
-                                               :keep)))
-            (to-remove [filenames] (map #(object %
-                                                 (fn [record] (str "rm " (:filename record)))
-                                                 :remove)
-                                        (butlast filenames)))]
-      ;(println (str "#HASH = " hash))
-      {:hash hash
-       :filenames (concat
-               (to-keep filenames)
-               (to-remove filenames))})))
+    {:hash      hash
+     :filenames (concat (map #(% [hash filenames]) actions))}))
 
 (defn apply-action
   [action]
