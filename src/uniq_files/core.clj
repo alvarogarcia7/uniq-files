@@ -22,6 +22,14 @@
                   current (get acc hash [])]
               (assoc acc hash (conj current filename)))) {} xs))
 
+(defn to-script
+  [[hash filenames]]
+  (let [filenames (sort filenames)]
+    ;(println (str "#HASH = " hash))
+    (concat
+      (list (str "# keep " (last filenames)))
+      (doall (map #(str "rm " %) (butlast filenames))))))
+
 (defn
   create-script
   [lines]
@@ -30,13 +38,7 @@
       lines
       (map tokenize)
       group-by-hash
-      (map (fn
-             [[hash filenames]]
-             (let [filenames (sort filenames)]
-               ;(println (str "#HASH = " hash))
-               (concat
-                 (list (str "# keep " (last filenames)))
-                 (doall (map #(str "rm " %) (butlast filenames)))))))
+      (map to-script)
       flatten
       )))
 
