@@ -32,7 +32,7 @@
              )
           [actual expected] (map #(into #{} %) (list actual expected))]
       (print-if-different actual expected)
-      (clojure.set/difference actual expected) => #{}))
+      actual => expected))
 
   (fact :acceptance
     "order of the file does matter. Files are sorted by occurrence, not by filename"
@@ -48,4 +48,4 @@
                      )
           [actual expected] (map #(into #{} %) (list actual expected))]
       (print-if-different actual expected)
-      (clojure.set/difference actual expected) => #{})))
+      actual => expected)))
