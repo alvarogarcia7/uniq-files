@@ -46,7 +46,8 @@
 (defn
   bash-script-action
   [lines]
-  (->> lines
-       create-script
-       (map println))
+  (->>
+    lines
+    create-script
+    (map println))
   )
