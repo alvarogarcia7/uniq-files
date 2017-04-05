@@ -31,15 +31,15 @@
   (let [filenames (sort filenames)]
     (letfn [(decorate [filename command] {:filename filename :command command})
             (to-keep [filenames] (list (decorate (last filenames)
-                                                 (fn [filename] (str "# keep " filename)))))
-            (to-remove [filenames] (doall (map #(decorate % (fn [filename] (str "rm " filename)))
+                                                 (fn [record] (str "# keep " (:filename record))))))
+            (to-remove [filenames] (doall (map #(decorate % (fn [record] (str "rm " (:filename record))))
                                                (butlast filenames))))]
       ;(println (str "#HASH = " hash))
       (->>
         (concat
           (to-keep filenames)
           (to-remove filenames))
-        (map #((:command %) (:filename %))))
+        (map #((:command %) %)))
       )))
 
 (defn
