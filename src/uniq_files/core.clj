@@ -31,8 +31,7 @@
   (let [filenames (sort filenames)]
     (letfn [(to-keep [filenames] (list {:filename (last filenames) :command (fn [filename] (str "# keep " filename))}))
             (to-remove [filenames] (doall (map #(-> {:filename % :command (fn [filename] (str "rm " filename))})
-                                               (butlast
-                                                                                                        filenames))))]
+                                               (butlast filenames))))]
       ;(println (str "#HASH = " hash))
       (->>
         (concat
