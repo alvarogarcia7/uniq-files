@@ -1,5 +1,8 @@
 (ns uniq-files.core-test
-  (:require [clojure.string :require :split]))
+  (:use [clojure.string]
+        [clojure.java.io])
+  (:require [midje.sweet :refer :all]))
+
 (defn
   group-by-hash
   [lines]
@@ -29,3 +32,9 @@
   [path]
   (with-open [rdr (reader path)]
     (doall (line-seq rdr))))
+
+(facts
+  "reading a file"
+  (fact
+    "happy path"
+    (lines "resources/files/lines.txt") => ["1" "a" "b"]))
