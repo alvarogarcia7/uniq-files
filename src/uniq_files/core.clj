@@ -52,8 +52,9 @@
     (map tokenize)
     group-by-hash
     (map decide-action)
-    (map apply-action)
-    flatten))
+    flatten
+    apply-action
+    ))
 
 
 (defn
