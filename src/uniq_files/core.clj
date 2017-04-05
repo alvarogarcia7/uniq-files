@@ -33,14 +33,12 @@
 (defn
   create-script
   [lines]
-  (letfn []
-    (->>
-      lines
-      (map tokenize)
-      group-by-hash
-      (map to-script)
-      flatten
-      )))
+  (->>
+    lines
+    (map tokenize)
+    group-by-hash
+    (map to-script)
+    flatten))
 
 
 (defn
