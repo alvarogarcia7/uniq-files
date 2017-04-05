@@ -21,5 +21,8 @@
              "# keep 2016-3.txt"                            ;e29311f6f1bf1af907f9ef9f44b8328b
              "# keep 2017-1.txt"                            ;60b725f10c9c85c70d97880dfe8191b3
              "# keep 2017-2.txt"                            ;bfcc9da4f2e1d313c63cd0a4ee7604e9
-             )]
-      (clojure.set/difference (into #{} actual) (into #{} expected)) => #{})))
+             )
+          [actual expected] (map #(into #{} %) (list actual expected))]
+      (if (not= #{} (clojure.set/difference actual expected))
+        (println {:expected expected :actual actual}))
+      (clojure.set/difference actual expected) => #{})))
