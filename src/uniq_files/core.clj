@@ -29,11 +29,13 @@
 (defn decide-action
   [[hash filenames]]
   (let [filenames (sort filenames)]
-    (letfn [(object [filename command] {:filename filename :command command})
+    (letfn [(object [filename command action-name] {:filename filename :command command :action-name action-name })
             (to-keep [filenames] (list (object (last filenames)
-                                               (fn [record] (str "# keep " (:filename record))))))
+                                               (fn [record] (str "# keep " (:filename record)))
+                                               :keep)))
             (to-remove [filenames] (map #(object %
-                                                 (fn [record] (str "rm " (:filename record))))
+                                                 (fn [record] (str "rm " (:filename record)))
+                                                 :remove)
                                         (butlast filenames)))]
       ;(println (str "#HASH = " hash))
       (concat
