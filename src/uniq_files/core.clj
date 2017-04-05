@@ -29,7 +29,8 @@
 (defn decide-action
   [[hash filenames]]
   (let [filenames (sort filenames)]
-    (letfn [(object [filename command action-name] {:filename filename :command command :action-name action-name})
+    (letfn [(object [filename command action-name] {:filename filename :command command :action-name action-name
+                                                    :hash hash})
             (to-keep [filenames] (list (object (last filenames)
                                                (fn [record] (str "# keep " (:filename record)))
                                                :keep)))
