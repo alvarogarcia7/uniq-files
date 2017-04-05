@@ -43,9 +43,8 @@
 
 (defn decide-action
   [hash-group]
-  (let [[hash filenames] hash-group]
-    {:hash      hash
-     :filenames (concat (map #(% [hash filenames]) actions))}))
+  {:hash      hash
+   :filenames (concat (map #(% hash-group) actions))})
 
 (defn apply-action
   [action]
