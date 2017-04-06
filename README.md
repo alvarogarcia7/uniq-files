@@ -26,6 +26,17 @@ To generate a script to remove the duplicated files [1]
 
 ## Run book
 
+### Input format
+
+This program expects:
+
+```
+filename-1 hash-1
+filename-2 hash-2
+```
+
+See In Scope for the criteria of which file is kept
+
 ### Pre-processing
 
 If you're using a md5 for mac, standardize the input format like so:
