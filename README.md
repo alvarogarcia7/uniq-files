@@ -10,12 +10,12 @@ To generate a script to remove the duplicated files [1]
 
 ### In scope
 
-  * To read the input format (see input format) TODO
+  * To read the input format (see input format)
   * Generate a script to keep the last file with the same hash. Remove the rest of the files with the same hash
 
 ### Out of scope
 
-  * To detect which files are equal. That is done through the input format (see input format) TODO
+  * To detect which files are equal. That is done through the input format (see input format)
   * To delete the files in itself. That is the responsibility of the program's operator
 
 ## Assumptions
