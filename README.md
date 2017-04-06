@@ -24,6 +24,12 @@ To generate a script to remove the duplicated files, based on file contents.
 
 ## Run book
 
+### Running the program
+
+```bash
+java -jar target/uberjar/uniq-files-0.1.0-SNAPSHOT-standalone.jar resources/example-1/md5.txt
+```
+
 ### Input format
 
 This program expects:
