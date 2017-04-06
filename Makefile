@@ -1,8 +1,11 @@
 .PHONY: test test-watch
 
 test:
-	  lein midje
+	lein midje
 
 test-watch:
-	  lein midje :autotest
+	lein midje :autotest
+
+package:
+	lein uberjar
 
