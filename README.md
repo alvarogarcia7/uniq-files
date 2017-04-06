@@ -1,7 +1,5 @@
 # Uniq-Files
 
-The domain is about files, hash (md5) and removing duplicated files
-
 ## Purpose
 
 To generate a script to remove the duplicated files, based on file contents.
