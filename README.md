@@ -35,7 +35,8 @@ filename-1 hash-1
 filename-2 hash-2
 ```
 
-(the filename and the hash are separated by one space)
+  * The filename and the hash are separated by one space
+  * Multiple files can (SHOULD) be input at once
 
 See In Scope for the criteria of which file is kept
 
