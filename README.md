@@ -6,6 +6,12 @@ The domain is about files, hash (md5) and removing duplicated files
 
 To generate a script to remove the duplicated files
 
+## Scope
+
+## Out of scope
+
+  * To detect which files are equal. That is done through the input format (see input format) TODO
+
 ## Run book
 
 ### Pre-processing
