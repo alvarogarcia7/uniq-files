@@ -16,6 +16,7 @@ To generate a script to remove the duplicated files
 ### Out of scope
 
   * To detect which files are equal. That is done through the input format (see input format) TODO
+  * To delete the files in itself. That is the responsibility of the program's operator
 
 ## Run book
 
