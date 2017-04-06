@@ -13,7 +13,7 @@ To generate a script to remove the duplicated files, based on file contents.
 
 ### Out of scope
 
-  * To detect which files are equal. That is done through the input format (see [input format][#input-format])
+  * To detect which files are equal. That is done through the input format (see [input format](#input-format))
   * To delete the files in itself. That is the responsibility of the program's operator
 
 ## Assumptions
