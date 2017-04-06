@@ -74,3 +74,7 @@ If you're using a md5 for mac, standardize the input format like so:
 with few (or none at all) hash collisions.
 
 
+## Implementation details
+
+  * This program is to be used as another small command-line utility: this is a library more than a framework, given
+  you don't lose control
