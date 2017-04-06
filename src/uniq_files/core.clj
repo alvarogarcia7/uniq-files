@@ -76,14 +76,19 @@
 
 (defn
   bash-script-action
-  [lines]
+  [file-lines]
   (->>
-    lines
+    file-lines
     create-script
-    (map println))
+    (map println)
+    doall)
   )
 
 (defn
   -main
-  [args]
-  (map bash-script-action args))
+  [& args]
+  (->>
+    args
+    first
+    lines
+    bash-script-action))
