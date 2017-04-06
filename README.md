@@ -38,7 +38,7 @@ filename-2 hash-2
   * The filename and the hash are separated by one space
   * Multiple files can (SHOULD) be input at once
 
-See In Scope for the criteria of which file is kept
+See [In Scope][In Scope] for the criteria of which file is kept
 
 
 ### Output format
