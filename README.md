@@ -27,7 +27,7 @@ To generate a script to remove the duplicated files [1]
 
 ### Pre-processing
 
-If you're using a md5 for mac, standarize the input format like so:
+If you're using a md5 for mac, standardize the input format like so:
 
 ```
 %s/^MD5 (\([^)]\+\)) = \(.*\)/\1 \2/
