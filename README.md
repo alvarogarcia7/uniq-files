@@ -37,6 +37,11 @@ filename-2 hash-2
 
 See In Scope for the criteria of which file is kept
 
+
+### Output format
+
+The output format is a bash script, that will invoke `rm`. It can have comments.
+
 ### Pre-processing
 
 If you're using a md5 for mac, standardize the input format like so:
