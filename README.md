@@ -43,6 +43,17 @@ See [In Scope][In Scope] for the criteria of which file is kept
 
 The output format is a bash script, that will invoke `rm`. It can have comments.
 
+An example output:
+
+```bash
+➜  uniq-files git:(master) java -jar target/uberjar/uniq-files-0.1.0-SNAPSHOT-standalone.jar resources/example-1/md5.txt
+# keep 2017-1.txt
+rm 2016-1.txt
+rm 2016-2.txt
+# keep 2016-3.txt
+# keep 2017-2.txt
+```
+
 ### Pre-processing
 
 If you're using a md5 for mac, standardize the input format like so:
