@@ -1,7 +1,7 @@
 (ns uniq-files.core
   (:gen-class)
-  (:use [clojure.java.io]
-        [clojure.string]))
+  (:use [clojure.java.io])
+  (:require [clojure.string :as str]))
 
 (defn
   lines
@@ -12,7 +12,7 @@
 (defn
   tokenize
   [line]
-  (let [[filename hash] (split line #" ")]
+  (let [[filename hash] (str/split line #" ")]
     {:hash hash :filename filename}))
 
 (defn group-by-hash
