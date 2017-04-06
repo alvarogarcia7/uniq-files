@@ -82,3 +82,8 @@
     create-script
     (map println))
   )
+
+(defn
+  -main
+  [args]
+  (map bash-script-action args))
