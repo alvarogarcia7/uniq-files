@@ -1,4 +1,5 @@
 (ns uniq-files.core
+  (:gen-class)
   (:use [clojure.java.io]
         [clojure.string]))
 
