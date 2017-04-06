@@ -20,8 +20,9 @@ To generate a script to remove the duplicated files [1]
 
 ## Assumptions
 
-  * About the hash function: Two files with the same contents produce the same hash value. Two files with different
-  contents produce different hash values. [1]
+  * About the hash function:
+    * Two files with the same contents produce the same hash value
+    * Two files with different contents produce different hash values. [1]
 
 ## Run book
 
