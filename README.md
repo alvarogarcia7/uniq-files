@@ -47,7 +47,9 @@ See [In Scope][In Scope] for the criteria of which file is kept
 
 ### Output format
 
-The output format is a bash script, that will invoke `rm`. It can have comments.
+The output format is a bash script, that will invoke `rm`. It can have comments. As of 2017-04, the program does not
+guarantee the order of the output files matches the order of the input file. (Open an issue if you wish to expand the
+ program. Or even better, send a pull request)
 
 An example output:
 
